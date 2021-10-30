@@ -1,4 +1,4 @@
-FROM ruby:3-alpine
+FROM ruby:3-alpine3.13
 MAINTAINER Roman v. Gemmeren <strowi@hasnoname.de>
 
 # Install dependencies
