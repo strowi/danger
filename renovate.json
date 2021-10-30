@@ -1,6 +1,10 @@
 {
+<<<<<<< HEAD
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>strowi/ci-templates:global"
   ]
+=======
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json"
+>>>>>>> 02153a623a53aecf7020dd60301a99c66294ab9b
 }
