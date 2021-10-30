@@ -1,0 +1,36 @@
+include:
+  - project: 'strowi/ci-templates'
+    file: '/build.yml'
+  - project: 'strowi/ci-templates'
+    file: '/tests.yml'
+
+stages:
+  - build
+  - test
+  - release
+
+
+docker:build:
+  extends: .build
+  stage: build
+  script:
+    - build_image
+
+container_scanning:
+  extends: .container_scanning
+  # parallel:
+  #   matrix:
+  #     - SUB_IMAGE_NAME:
+  #       - /xyz
+
+release:
+  extends: .build
+  stage: release
+  script:
+    - release_latest
+    - docker tag "$CI_REGISTRY_IMAGE" "strowi/$CI_PROJECT_NAME"
+    - echo $DOCKER_TOKEN | docker login -u strowi --password-stdin
+    - docker push "strowi/$CI_PROJECT_NAME"
+  only:
+    - master
+    - main
