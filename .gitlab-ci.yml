@@ -31,6 +31,13 @@ release:
     - docker tag "$CI_REGISTRY_IMAGE" "strowi/$CI_PROJECT_NAME"
     - echo $DOCKER_TOKEN | docker login -u strowi --password-stdin
     - docker push "strowi/$CI_PROJECT_NAME"
+    - local code=$(jq -n --arg msg "$(<README.md)" \
+      '{"registry":"registry-1.docker.io","full_description": $msg }' | \
+        curl -s -o /dev/null  -L -w "%{http_code}" \
+           https://cloud.docker.com/v2/repositories/"strowi/${CI_PROJECT_NAME}"/ \
+           -d @- -X PATCH \
+           -H "Content-Type: application/json" \
+           -H "Authorization: JWT ${token}")
   only:
     - master
     - main
