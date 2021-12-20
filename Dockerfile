@@ -4,10 +4,14 @@ MAINTAINER Roman v. Gemmeren <strowi@hasnoname.de>
 # Install dependencies
 RUN apk add curl git git-crypt bash
 
-# renovate: datasource=github-releases depName=danger/danger versioning=loose
+
+# renovate: datasource=nix_unstable depName=danger-gitlab versioning=loose
 ENV DANGER_VERSION="8.0.0"
+# renovate: datasource=github-releases depName=danger/danger versioning=loose
+ENV DANGER_GITLAB_VERSION="8.0.0"
 RUN gem install --no-document \
-  danger-gitlab:${DANGER_VERSION} \
+  danger:${DANGER_VERSION} \
+  danger-gitlab:${DANGER_GITLAB_VERSION} \
   gitlab_roulette \
   danger-mention \
   danger-changelog \
