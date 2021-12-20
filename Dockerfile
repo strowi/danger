@@ -4,7 +4,7 @@ MAINTAINER Roman v. Gemmeren <strowi@hasnoname.de>
 # Install dependencies
 RUN apk add curl git git-crypt bash
 
-# renovate: datasource=github-releases depName=danger/danger versioning=loose
+# renovate: datasource=github-releases depName=danger/danger versioning=latest
 ENV DANGER_VERSION="8.0.0"
 RUN gem install --no-document \
   danger-gitlab:${DANGER_VERSION} \
